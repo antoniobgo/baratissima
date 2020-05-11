@@ -35,8 +35,6 @@ export default {
   },
   methods: {
     addCartItem() {
-      // eslint-disable-next-line no-debugger
-      debugger;
       this.$store.commit("addItemOnCart", this.product);
     }
   }
