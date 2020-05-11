@@ -7,7 +7,38 @@
       height="180"
       )
     v-card-text
-      h1 oi
+      v-list-item(three-line)
+        v-list-item-content
+          v-list-item-title {{ product.name }}
+          v-list-item-subtitle {{ product.price }}
     v-card-actions
-      v-btn rá
+      v-spacer
+      v-btn(
+        @click="addCartItem"
+      )
+        | Adicionar ao carrinho
+      v-spacer
 </template>
+
+<script>
+export default {
+  props: {
+    product: {
+      type: Object,
+      required: true
+    }
+  },
+  data() {
+    return {
+      productName: undefined
+    };
+  },
+  methods: {
+    addCartItem() {
+      // eslint-disable-next-line no-debugger
+      debugger;
+      this.$store.commit("addItemOnCart", this.product);
+    }
+  }
+};
+</script>
