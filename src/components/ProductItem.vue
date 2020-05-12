@@ -10,7 +10,7 @@
       v-list-item(three-line)
         v-list-item-content
           v-list-item-title {{ product.name }}
-          v-list-item-subtitle {{ product.price }}
+          v-list-item-subtitle R${{ product.price }}
     v-card-actions
       v-spacer
       v-btn(

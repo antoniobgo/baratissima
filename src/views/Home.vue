@@ -27,7 +27,6 @@ export default {
 
   mounted() {
     axios.get("http://localhost:3001/api/products").then(response => {
-      // eslint-disable-next-line no-debugger
       this.products = response.data.data;
     });
   },
