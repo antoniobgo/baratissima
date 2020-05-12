@@ -27,7 +27,7 @@
           v-card-title
             | Selecione a quantidade
           v-card-subtitle.mt-0
-            | Quantidade disponivel: 4
+            | Quantidade disponivel: {{ product.quantity }}
           v-card-text
             v-row(dense)
               v-col(cols="3")
@@ -35,6 +35,7 @@
                   v-model="quantity"
                   outlined
                   dense
+                  disabled
                 )
               v-col(cols="2")
                 v-btn(
@@ -87,10 +88,12 @@ export default {
         product: this.product,
         quantity: this.quantity
       });
+      this.product.quantity -= this.quantity;
+      this.quantity = 0;
       this.closeDialog();
     },
     incrementQuantity() {
-      this.quantity++;
+      if (this.quantity < this.product.quantity) this.quantity++;
     },
     decrementQuantity() {
       if (this.quantity > 0) this.quantity--;

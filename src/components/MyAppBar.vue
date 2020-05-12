@@ -22,7 +22,8 @@
             )
           v-list-item-content
             v-list-item-title {{ product.name }}
-            v-list-item-subtitle R$ {{ product.price }}
+            v-list-item-subtitle Quantidade: {{ product.boughtQuantity }}
+            v-list-item-subtitle R$ {{ priceWithQuantity(product) }}
         v-divider
         v-list-item
           v-list-item-content
@@ -38,11 +39,15 @@ export default {
     totalPrice() {
       let price = 0;
       this.cartProducts.forEach(product => {
-        price = price + parseFloat(product.price);
+        price = price + parseFloat(product.price) * product.boughtQuantity;
       });
       return price.toFixed(2);
     }
   },
-  methods: {}
+  methods: {
+    priceWithQuantity(product) {
+      return parseFloat(product.price) * product.boughtQuantity;
+    }
+  }
 };
 </script>

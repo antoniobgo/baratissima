@@ -24,14 +24,6 @@ export default {
     axios.get("http://localhost:3001/api/products").then(response => {
       this.products = response.data.data;
     });
-  },
-  watch: {
-    // products() {
-    // if (this.products) {
-    // eslint-disable-next-line no-debugger
-    // debugger;
-    // }
-    // },
   }
 };
 </script>
