@@ -9,9 +9,10 @@ export default new Vuex.Store({
     cartProducts: [],
   },
   mutations: {
-    addItemOnCart(state, product) {
-      state.count++;
-      state.cartProducts.push(product);
+    addItemOnCart(state, data) {
+      state.count = state.count + data.quantity;
+      for (let i = 0; i < data.quantity; i++)
+        state.cartProducts.push(data.product);
     },
   },
   actions: {},

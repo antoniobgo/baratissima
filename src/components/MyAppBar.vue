@@ -3,7 +3,7 @@
     | Baratíssima Loja
     v-spacer
     | Carrinho
-    v-menu(bottom offset-y)
+    v-menu(bottom offset-y scrollable max-height="400")
       template(v-slot:activator="{ on }")
         v-btn(
           v-on="on"
@@ -25,8 +25,9 @@
             v-list-item-subtitle R$ {{ product.price }}
         v-divider
         v-list-item
-          v-list-item-title Preço total: {{ totalPrice }}
-
+          v-list-item-content
+            v-list-item-title Preço total: R${{ totalPrice }}
+            v-list-item-title Pague agora!
 </template>
 
 <script>
@@ -39,7 +40,7 @@ export default {
       this.cartProducts.forEach(product => {
         price = price + parseFloat(product.price);
       });
-      return price;
+      return price.toFixed(2);
     }
   },
   methods: {}

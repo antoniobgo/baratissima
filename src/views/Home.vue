@@ -6,11 +6,6 @@
                   v-for="product in products"
                   :product="product"
                   )
-    v-row(dense v-if="products")
-      product-item.mx-4(
-                  v-for="product in products"
-                  :product="product"
-                  )
 </template>
 
 <script>
