@@ -11,8 +11,9 @@ export default new Vuex.Store({
   mutations: {
     addItemOnCart(state, data) {
       state.count = state.count + data.quantity;
-      data.product.boughtQuantity = data.quantity;
-      state.cartProducts.push(data.product);
+      data.product.bought_quantity += data.quantity;
+      if (!state.cartProducts.includes(data.product))
+        state.cartProducts.push(data.product);
     },
   },
   actions: {},
