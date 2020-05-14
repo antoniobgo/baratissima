@@ -17,12 +17,11 @@
         width="300"
         )
         template(v-slot:activator="{ on }")
-          v-spacer
-          v-btn(
-            v-on="on"
-          )
-            | Adicionar ao carrinho
-          v-spacer
+          v-row(justify="center")
+            v-btn(
+              v-on="on"
+            )
+              | Adicionar ao carrinho
         v-card
           v-card-title
             | Selecione a quantidade
@@ -51,16 +50,19 @@
                   v-icon mdi-plus-circle-outline
             v-divider
           v-card-actions
-            v-spacer
-            v-btn(
-              @click="closeDialog"
-              outlined
-            ) Cancelar
-            v-btn(
-              @click="addCartItems"
-              :disabled="isConfirmButtonDisabled"
-              outlined
-            ) Confirmar
+            v-container
+              v-row(justify="space-between")
+                v-btn.ml-4(
+                  @click="closeDialog"
+                  outlined
+                  small
+                ) Cancelar
+                v-btn.mr-4(
+                  @click="addCartItems"
+                  :disabled="isConfirmButtonDisabled"
+                  small
+                  outlined
+                ) Confirmar
 </template>
 
 <script>
@@ -73,7 +75,6 @@ export default {
   },
   data() {
     return {
-      productName: undefined,
       dialog: false,
       quantity: 0,
       rules: [value => value > 0 && value <= this.product.quantity]
@@ -99,9 +100,19 @@ export default {
     },
     incrementQuantity() {
       if (this.quantity < this.product.quantity) this.quantity++;
+      this.checkValuesAndSetValue();
     },
     decrementQuantity() {
       if (this.quantity > 0) this.quantity--;
+      this.checkValuesAndSetValue();
+    },
+    checkValuesAndSetValue() {
+      if (
+        isNaN(this.quantity) ||
+        this.quantity < 0 ||
+        this.quantity > this.product.quantity
+      )
+        this.quantity = 0;
     },
     closeDialog() {
       this.dialog = false;
