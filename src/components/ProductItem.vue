@@ -33,9 +33,9 @@
               v-col(cols="3")
                 v-text-field(
                   v-model="quantity"
+                  :rules="rules"
                   outlined
                   dense
-                  disabled
                 )
               v-col(cols="2")
                 v-btn(
@@ -58,6 +58,7 @@
             ) Cancelar
             v-btn(
               @click="addCartItems"
+              :disabled="isConfirmButtonDisabled"
               outlined
             ) Confirmar
 </template>
@@ -74,12 +75,16 @@ export default {
     return {
       productName: undefined,
       dialog: false,
-      quantity: 0
+      quantity: 0,
+      rules: [value => value > 0 && value <= this.product.quantity]
     };
   },
   computed: {
     productPrice() {
       return parseFloat(this.product.price).toFixed(2);
+    },
+    isConfirmButtonDisabled() {
+      return !(this.quantity > 0 && this.quantity <= this.product.quantity);
     }
   },
   methods: {
@@ -100,6 +105,7 @@ export default {
     },
     closeDialog() {
       this.dialog = false;
+      this.quantity = 0;
     }
   }
 };
