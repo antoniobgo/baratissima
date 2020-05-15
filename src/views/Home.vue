@@ -1,29 +1,65 @@
 /* eslint-disable no-debugger */
 <template lang="pug">
-  v-container(fluid)
-    v-row(dense v-if="products")
+  v-container(v-if="products && !loading" fluid)
+    v-row(dense)
       product-item.ma-4(
-                  v-for="product in products"
+                  v-for="product in getPageProducts"
                   :product="product"
                   )
+    v-divider
+    v-row
+      v-col
+        v-row(justify="center")
+          pagination-items(
+            :totalPages="totalPagesArray"
+            :currentPage="currentPage"
+            @changePage="changeCurrentPage"
+          )
 </template>
 
 <script>
-import ProductItem from "@/components/ProductItem";
 import axios from "axios";
+import ProductItem from "@/components/ProductItem";
+import PaginationItems from "@/components/PaginationItems";
 export default {
   name: "Home",
-  components: { ProductItem },
+  components: { ProductItem, PaginationItems },
   data() {
     return {
-      products: undefined
+      products: undefined,
+      itemsPerPage: 12,
+      totalPagesArray: undefined,
+      loading: true,
+      currentPage: 1
     };
   },
-
   mounted() {
     axios.get("http://localhost:3001/api/products").then(response => {
       this.products = response.data.data;
+      let totalPages = parseInt(this.products.length / this.itemsPerPage) + 1;
+      this.totalPagesArray = Array.from(
+        { length: totalPages },
+        (_, index) => index + 1
+      );
+      this.loading = false;
     });
+  },
+  computed: {
+    getPageProducts() {
+      let pageProducts = [];
+      for (
+        let i = this.itemsPerPage * (this.currentPage - 1);
+        i < this.itemsPerPage * this.currentPage;
+        i++
+      )
+        if (this.products[i]) pageProducts.push(this.products[i]);
+      return pageProducts;
+    }
+  },
+  methods: {
+    changeCurrentPage(newCurrentPage) {
+      this.currentPage = newCurrentPage;
+    }
   }
-};
+}; /*  */
 </script>
