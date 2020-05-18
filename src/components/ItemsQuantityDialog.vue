@@ -63,7 +63,7 @@ export default {
   data() {
     return {
       dialog: false,
-      quantity: 0,
+      quantity: 1,
       rules: [value => value > 0 && value <= this.product.quantity]
     };
   },
@@ -79,7 +79,7 @@ export default {
         quantity: this.quantity
       });
       this.product.quantity -= this.quantity;
-      this.quantity = 0;
+      this.quantity = 1;
       this.closeDialog();
     },
     incrementQuantity() {
@@ -96,11 +96,11 @@ export default {
         this.quantity < 0 ||
         this.quantity > this.product.quantity
       )
-        this.quantity = 0;
+        this.quantity = 1;
     },
     closeDialog() {
       this.dialog = false;
-      this.quantity = 0;
+      this.quantity = 1;
     }
   }
 };

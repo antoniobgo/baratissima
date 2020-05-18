@@ -1,20 +1,21 @@
 /* eslint-disable no-debugger */
 <template lang="pug">
-  v-container(v-if="products && !loading" fluid)
+  v-container(
+    v-if="products && !loading"
+    fluid
+    )
     v-row(dense)
       product-item.ma-4(
                   v-for="product in getPageProducts"
                   :product="product"
                   )
     v-divider
-    v-row
-      v-col
-        v-row(justify="center")
-          pagination-items(
-            :totalPages="totalPagesArray"
-            :currentPage="currentPage"
-            @changePage="changeCurrentPage"
-          )
+    v-row(justify="center")
+      pagination-items(
+        :totalPages="totalPagesArray"
+        :currentPage="currentPage"
+        @changePage="changeCurrentPage"
+      )
 </template>
 
 <script>
@@ -27,7 +28,7 @@ export default {
   data() {
     return {
       products: undefined,
-      itemsPerPage: 12,
+      itemsPerPage: 10,
       totalPagesArray: undefined,
       loading: true,
       currentPage: 1
