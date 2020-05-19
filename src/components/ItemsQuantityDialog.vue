@@ -7,6 +7,7 @@ v-dialog(
     v-row(justify="center")
       v-btn(
         v-on="on"
+        outlined
       )
         | Adicionar ao carrinho
   v-card
@@ -53,6 +54,7 @@ v-dialog(
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   props: {
     product: {
@@ -62,23 +64,29 @@ export default {
   },
   data() {
     return {
-      dialog: false,
       quantity: 1,
-      rules: [value => value > 0 && value <= this.product.quantity]
+      dialog: false,
+      rules: [value => value > 0 && value <= this.product.quantity],
+      insideRequest: false
     };
   },
   computed: {
+    ...mapState(["itemsQuantityDialog"]),
     isConfirmButtonDisabled() {
       return !(this.quantity > 0 && this.quantity <= this.product.quantity);
+    }
+  },
+  watch: {
+    itemsQuantityDialog() {
+      if (!this.itemsQuantityDialog) this.dialog = this.itemsQuantityDialog;
     }
   },
   methods: {
     addCartItems() {
       this.$store.commit("addItemOnCart", {
         product: this.product,
-        quantity: this.quantity
+        quantity: parseInt(this.quantity)
       });
-      this.product.quantity -= this.quantity;
       this.quantity = 1;
       this.closeDialog();
     },

@@ -1,4 +1,3 @@
-/* eslint-disable no-debugger */
 <template lang="pug">
   v-container(
     v-if="products && !loading"
