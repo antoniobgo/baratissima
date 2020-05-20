@@ -37,6 +37,7 @@ v-menu(
       v-list-item-content
         v-list-item-title Preço total: R${{ totalPrice }}
         v-list-item-title Pague agora!
+        v-list-item-title {{ cartProductsSize }}
   v-card(v-else width="300")
     v-card-title
       | Seu carrinho está vazio!
@@ -49,18 +50,21 @@ import { mapState } from "vuex";
 export default {
   data() {
     return {
-      quantity: 0
+      quantity: 0,
     };
   },
   computed: {
     ...mapState(["count", "cartProducts"]),
+    cartProductsSize() {
+      return this.cartProducts.length;
+    },
     totalPrice() {
       let price = 0;
-      this.cartProducts.forEach(product => {
+      this.cartProducts.forEach((product) => {
         price = price + parseFloat(product.price) * product.bought_quantity;
       });
       return price.toFixed(2);
-    }
+    },
   },
   methods: {
     priceWithQuantity(product) {
@@ -73,15 +77,15 @@ export default {
       this.quantity = product.quantity;
       if (product.bought_quantity < this.quantity + product.bought_quantity)
         this.$store.commit("incrementProductBoughtQuantity", {
-          product: product
+          product: product,
         });
     },
     decrementQuantity(product) {
       if (product.bought_quantity > 0)
         this.$store.commit("decrementProductBoughtQuantity", {
-          product: product
+          product: product,
         });
-    }
-  }
+    },
+  },
 };
 </script>

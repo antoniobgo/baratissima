@@ -10,7 +10,7 @@
 import CartMenu from "@/components/CartMenu";
 export default {
   components: {
-    CartMenu
-  }
+    CartMenu,
+  },
 };
 </script>

@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Vuex from "vuex";
-
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -25,6 +24,12 @@ export default new Vuex.Store({
       state.count--;
       data.product.bought_quantity--;
       data.product.quantity++;
+      if (data.product.bought_quantity == 0) {
+        let index = state.cartProducts.findIndex((productToWithdraw) => {
+          return productToWithdraw.id == data.product.id;
+        });
+        state.cartProducts.splice(index, 1);
+      }
     },
   },
   actions: {},
