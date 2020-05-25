@@ -11,7 +11,9 @@
       v-list-item(three-line)
         v-list-item-content
           v-list-item-title {{ product.name }}
-          v-list-item-subtitle R${{ productPrice }}
+          v-list-item-subtitle {{ product.description }}
+          v-list-item-subtitle {{ productPrice }}
+          v-list-item-subtitle(v-if="product.on_sale") {{ productSalePrice }}
     v-card-actions
       items-quantity-dialog(:product="product")
 </template>
@@ -30,10 +32,16 @@ export default {
   },
   computed: {
     productPrice() {
-      return parseFloat(this.product.price).toFixed(2);
+      if (!this.product.on_sale)
+        return "R$" + parseFloat(this.product.price).toFixed(2);
+      return "De R$" + parseFloat(this.product.price).toFixed(2);
     },
     productImageLink() {
       return this.product.image_link;
+    },
+    productSalePrice() {
+      let salePrice = this.product.price * (this.product.sale_percentage / 100);
+      return "Por " + salePrice.toFixed(2) + "!!";
     }
   }
 };
