@@ -27,7 +27,7 @@ export default {
   data() {
     return {
       products: undefined,
-      itemsPerPage: 10,
+      itemsPerPage: 12,
       totalPagesArray: undefined,
       loading: true,
       currentPage: 1
@@ -36,7 +36,7 @@ export default {
   mounted() {
     axios.get("http://localhost:3001/api/products").then(response => {
       this.products = response.data.data;
-      let totalPages = parseInt(this.products.length / this.itemsPerPage) + 1;
+      let totalPages = this.getTotalPages();
       this.totalPagesArray = Array.from(
         { length: totalPages },
         (_, index) => index + 1
@@ -59,6 +59,11 @@ export default {
   methods: {
     changeCurrentPage(newCurrentPage) {
       this.currentPage = newCurrentPage;
+    },
+    getTotalPages() {
+      let lengthPerItems = parseInt(this.products.length / this.itemsPerPage);
+      if (this.products.length % this.itemsPerPage == 0) return lengthPerItems;
+      return lengthPerItems + 1;
     }
   }
 }; /*  */

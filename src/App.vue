@@ -1,7 +1,7 @@
 <template lang="pug">
   v-app
     my-app-bar
-    v-navigation-drawer(app)
+    my-nav-drawer
     v-content
       v-container(fluid)
         router-view
@@ -9,13 +9,17 @@
 
 <script>
 import MyAppBar from "@/components/MyAppBar";
+import MyNavDrawer from "@/components/MyNavDrawer";
 export default {
   name: "App",
 
-  components: { MyAppBar },
+  components: {
+    MyAppBar,
+    MyNavDrawer,
+  },
 
   data: () => ({
     //
-  })
+  }),
 };
 </script>

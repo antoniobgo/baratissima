@@ -4,7 +4,7 @@
     outlined
   )
     v-img(
-      src="https://i.correiobraziliense.com.br/D7nA7yEBHX5e3Qgc7iQ7nMJYM5I=/675x/smart/imgsapp2.correiobraziliense.com.br/app/noticia_127983242361/2019/10/04/794834/20191004154953157610i.jpg"
+      :src="productImageLink"
       height="180"
       )
     v-card-text
@@ -31,6 +31,9 @@ export default {
   computed: {
     productPrice() {
       return parseFloat(this.product.price).toFixed(2);
+    },
+    productImageLink() {
+      return this.product.image_link;
     }
   }
 };
