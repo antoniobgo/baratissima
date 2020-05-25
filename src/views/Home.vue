@@ -26,7 +26,11 @@ export default {
   components: { ProductItem, PaginationItems },
   data() {
     return {
+      dataProducts: undefined,
       products: undefined,
+      saleProducts: undefined,
+      electronicProducts: undefined,
+      bookProducts: undefined,
       itemsPerPage: 12,
       totalPagesArray: undefined,
       loading: true,
@@ -35,7 +39,10 @@ export default {
   },
   mounted() {
     axios.get("http://localhost:3001/api/products").then(response => {
-      this.products = response.data.data;
+      this.dataProducts = response.data.data;
+      this.products = this.lodash.filter(this.dataProducts, product => {
+        return product.on_sale == true;
+      });
       let totalPages = this.getTotalPages();
       this.totalPagesArray = Array.from(
         { length: totalPages },
