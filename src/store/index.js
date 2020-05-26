@@ -6,6 +6,8 @@ export default new Vuex.Store({
   state: {
     cartProducts: [],
     count: 0,
+    dataProducts: undefined,
+    products: undefined,
   },
   mutations: {
     addItemOnCart(state, data) {
@@ -30,6 +32,14 @@ export default new Vuex.Store({
         });
         state.cartProducts.splice(index, 1);
       }
+    },
+    setDataProducts(state, data) {
+      // eslint-disable-next-line no-debugger
+      debugger;
+      state.dataProducts = data;
+    },
+    setProducts(state, data) {
+      state.products = data;
     },
   },
   actions: {},

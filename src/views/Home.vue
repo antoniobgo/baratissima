@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import axios from "axios";
 import ProductItem from "@/components/ProductItem";
 import PaginationItems from "@/components/PaginationItems";
@@ -26,11 +27,6 @@ export default {
   components: { ProductItem, PaginationItems },
   data() {
     return {
-      dataProducts: undefined,
-      products: undefined,
-      saleProducts: undefined,
-      electronicProducts: undefined,
-      bookProducts: undefined,
       itemsPerPage: 12,
       totalPagesArray: undefined,
       loading: true,
@@ -40,9 +36,11 @@ export default {
   mounted() {
     axios.get("http://localhost:3001/api/products").then(response => {
       this.dataProducts = response.data.data;
-      this.products = this.lodash.filter(this.dataProducts, product => {
+      this.$store.commit("setDataProducts", response.data.data);
+      let products = this.lodash.filter(this.dataProducts, product => {
         return product.on_sale == true;
       });
+      this.$store.commit("setProducts", products);
       let totalPages = this.getTotalPages();
       this.totalPagesArray = Array.from(
         { length: totalPages },
@@ -52,6 +50,7 @@ export default {
     });
   },
   computed: {
+    ...mapState(["products", "dataProducts"]),
     getPageProducts() {
       let pageProducts = [];
       for (
