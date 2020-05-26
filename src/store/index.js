@@ -45,6 +45,11 @@ export default new Vuex.Store({
         return product.product_type == "electronic";
       });
     },
+    showBookProducts(state) {
+      state.products = state.dataProducts.filter((product) => {
+        return product.product_type == "book";
+      });
+    },
     showSaleProducts(state) {
       state.products = state.dataProducts.filter((product) => {
         return product.on_sale == true;

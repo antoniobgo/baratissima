@@ -37,7 +37,10 @@ export default {
       this.$store.commit("showElectronicProducts");
       this.scrollUp();
     },
-    showBookProducts() {},
+    showBookProducts() {
+      this.$store.commit("showBookProducts");
+      this.scrollUp();
+    },
     scrollUp() {
       window.scrollTo(0, 0);
     }

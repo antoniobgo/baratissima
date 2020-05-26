@@ -34,8 +34,10 @@ export default {
   },
   mounted() {
     axios.get("http://localhost:3001/api/products").then(response => {
-      this.dataProducts = response.data.data;
-      this.$store.commit("setDataProducts", response.data.data);
+      this.$store.commit(
+        "setDataProducts",
+        this.lodash.shuffle(response.data.data)
+      );
       let products = this.lodash.filter(this.dataProducts, product => {
         return product.on_sale == true;
       });
@@ -63,6 +65,7 @@ export default {
   methods: {
     changeCurrentPage(newCurrentPage) {
       this.currentPage = newCurrentPage;
+      window.scrollTo(0, 0);
     },
     getTotalPagesAndResetCurrentPage() {
       this.currentPage = 1;
