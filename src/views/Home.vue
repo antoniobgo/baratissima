@@ -46,7 +46,7 @@ export default {
     });
   },
   computed: {
-    ...mapState(["products", "dataProducts", "productTypeToShow"]),
+    ...mapState(["products", "dataProducts"]),
     getPageProducts() {
       let pageProducts = [];
       for (

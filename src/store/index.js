@@ -55,6 +55,56 @@ export default new Vuex.Store({
         return product.on_sale == true;
       });
     },
+    showHigherPrices(state) {
+      function comparePrice(a, b) {
+        if (a.price < b.price) return 1;
+        else if (a.price > b.price) return -1;
+        else return 0;
+      }
+      state.products = state.products.sort(comparePrice);
+    },
+    showSmallerPrices(state) {
+      function comparePrice(a, b) {
+        if (a.price > b.price) return 1;
+        else if (a.price < b.price) return -1;
+        else return 0;
+      }
+      state.products = state.products.sort(comparePrice);
+    },
+    showHigherQuantities(state) {
+      function comparePrice(a, b) {
+        if (a.quantity < b.quantity) return 1;
+        else if (a.quantity > b.quantity) return -1;
+        else return 0;
+      }
+      state.products = state.products.sort(comparePrice);
+    },
+    showSmallerQuantities(state) {
+      function compareQuantity(a, b) {
+        if (a.quantity > b.quantity) return 1;
+        else if (a.quantity < b.quantity) return -1;
+        else return 0;
+      }
+      state.products = state.products.sort(compareQuantity);
+    },
+    showHigherPopularity(state) {
+      // eslint-disable-next-line no-debugger
+      debugger;
+      function comparePopularity(a, b) {
+        if (a.bought_quantity < b.bought_quantity) return 1;
+        else if (a.bought_quantity > b.bought_quantity) return -1;
+        else return 0;
+      }
+      state.products = state.products.sort(comparePopularity);
+    },
+    showSmallerPopularity(state) {
+      function comparePopularity(a, b) {
+        if (a.bought_quantity > b.bought_quantity) return 1;
+        else if (a.bought_quantity < b.bought_quantity) return -1;
+        else return 0;
+      }
+      state.products = state.products.sort(comparePopularity);
+    },
   },
   actions: {},
   modules: {},

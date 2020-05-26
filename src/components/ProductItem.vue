@@ -41,7 +41,7 @@ export default {
     },
     productSalePrice() {
       let salePrice = this.product.price * (this.product.sale_percentage / 100);
-      return "Por " + salePrice.toFixed(2) + "!!";
+      return "Por apenas R$" + salePrice.toFixed(2) + "!!";
     }
   }
 };
