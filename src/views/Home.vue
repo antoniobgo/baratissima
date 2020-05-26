@@ -11,7 +11,7 @@
     v-divider
     v-row(justify="center")
       pagination-items(
-        :totalPages="totalPagesArray"
+        :totalPages="getTotalPagesArray"
         :currentPage="currentPage"
         @changePage="changeCurrentPage"
       )
@@ -28,7 +28,6 @@ export default {
   data() {
     return {
       itemsPerPage: 12,
-      totalPagesArray: undefined,
       loading: true,
       currentPage: 1
     };
@@ -41,16 +40,11 @@ export default {
         return product.on_sale == true;
       });
       this.$store.commit("setProducts", products);
-      let totalPages = this.getTotalPages();
-      this.totalPagesArray = Array.from(
-        { length: totalPages },
-        (_, index) => index + 1
-      );
       this.loading = false;
     });
   },
   computed: {
-    ...mapState(["products", "dataProducts"]),
+    ...mapState(["products", "dataProducts", "productTypeToShow"]),
     getPageProducts() {
       let pageProducts = [];
       for (
@@ -60,6 +54,10 @@ export default {
       )
         if (this.products[i]) pageProducts.push(this.products[i]);
       return pageProducts;
+    },
+    getTotalPagesArray() {
+      let totalPages = this.getTotalPages();
+      return Array.from({ length: totalPages }, (_, index) => index + 1);
     }
   },
   methods: {

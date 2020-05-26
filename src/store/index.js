@@ -8,6 +8,7 @@ export default new Vuex.Store({
     count: 0,
     dataProducts: undefined,
     products: undefined,
+    productTypeToShow: "on_sale",
   },
   mutations: {
     addItemOnCart(state, data) {
@@ -34,12 +35,20 @@ export default new Vuex.Store({
       }
     },
     setDataProducts(state, data) {
-      // eslint-disable-next-line no-debugger
-      debugger;
       state.dataProducts = data;
     },
     setProducts(state, data) {
       state.products = data;
+    },
+    showElectronicProducts(state) {
+      state.products = state.dataProducts.filter((product) => {
+        return product.product_type == "electronic";
+      });
+    },
+    showSaleProducts(state) {
+      state.products = state.dataProducts.filter((product) => {
+        return product.on_sale == true;
+      });
     },
   },
   actions: {},
