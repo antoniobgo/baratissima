@@ -31,11 +31,16 @@ export default {
   methods: {
     showSaleProducts() {
       this.$store.commit("showSaleProducts");
+      this.scrollUp();
     },
     showElectronicProducts() {
       this.$store.commit("showElectronicProducts");
+      this.scrollUp();
     },
-    showBookProducts() {}
+    showBookProducts() {},
+    scrollUp() {
+      window.scrollTo(0, 0);
+    }
   }
 };
 </script>

@@ -56,7 +56,7 @@ export default {
       return pageProducts;
     },
     getTotalPagesArray() {
-      let totalPages = this.getTotalPages();
+      let totalPages = this.getTotalPagesAndResetCurrentPage();
       return Array.from({ length: totalPages }, (_, index) => index + 1);
     }
   },
@@ -64,7 +64,8 @@ export default {
     changeCurrentPage(newCurrentPage) {
       this.currentPage = newCurrentPage;
     },
-    getTotalPages() {
+    getTotalPagesAndResetCurrentPage() {
+      this.currentPage = 1;
       let lengthPerItems = parseInt(this.products.length / this.itemsPerPage);
       if (this.products.length % this.itemsPerPage == 0) return lengthPerItems;
       return lengthPerItems + 1;

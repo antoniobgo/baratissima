@@ -21,7 +21,7 @@ v-menu(
         size="60"
       )
         v-img(
-          src="https://i.correiobraziliense.com.br/D7nA7yEBHX5e3Qgc7iQ7nMJYM5I=/675x/smart/imgsapp2.correiobraziliense.com.br/app/noticia_127983242361/2019/10/04/794834/20191004154953157610i.jpg"
+          :src="product.image_link"
         )
       v-list-item-content
         v-list-item-title {{ product.name }}
@@ -50,7 +50,7 @@ import { mapState } from "vuex";
 export default {
   data() {
     return {
-      quantity: 0,
+      quantity: 0
     };
   },
   computed: {
@@ -60,11 +60,11 @@ export default {
     },
     totalPrice() {
       let price = 0;
-      this.cartProducts.forEach((product) => {
+      this.cartProducts.forEach(product => {
         price = price + parseFloat(product.price) * product.bought_quantity;
       });
       return price.toFixed(2);
-    },
+    }
   },
   methods: {
     priceWithQuantity(product) {
@@ -77,15 +77,15 @@ export default {
       this.quantity = product.quantity;
       if (product.bought_quantity < this.quantity + product.bought_quantity)
         this.$store.commit("incrementProductBoughtQuantity", {
-          product: product,
+          product: product
         });
     },
     decrementQuantity(product) {
       if (product.bought_quantity > 0)
         this.$store.commit("decrementProductBoughtQuantity", {
-          product: product,
+          product: product
         });
-    },
-  },
+    }
+  }
 };
 </script>
