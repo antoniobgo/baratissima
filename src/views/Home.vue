@@ -3,6 +3,8 @@
     v-if="products && !loading"
     fluid
     )
+    v-row(justify="center")
+      h1.mr-10 {{ showProductType }}
     v-row(dense)
       product-item.ma-4(
                   v-for="product in getPageProducts"
@@ -46,7 +48,7 @@ export default {
     });
   },
   computed: {
-    ...mapState(["products", "dataProducts"]),
+    ...mapState(["products", "dataProducts", "productTypeToShow"]),
     getPageProducts() {
       let pageProducts = [];
       for (
@@ -60,6 +62,16 @@ export default {
     getTotalPagesArray() {
       let totalPages = this.getTotalPagesAndResetCurrentPage();
       return Array.from({ length: totalPages }, (_, index) => index + 1);
+    },
+    showProductType() {
+      switch (this.productTypeToShow) {
+        case "sale":
+          return "Produtos em promoção!";
+        case "electronic":
+          return "Produtos eletrônicos";
+        default:
+          return "Livros";
+      }
     }
   },
   methods: {
