@@ -40,7 +40,9 @@ export default {
       return this.product.image_link;
     },
     productSalePrice() {
-      let salePrice = this.product.price * (this.product.sale_percentage / 100);
+      let salePrice =
+        this.product.price -
+        this.product.price * (this.product.sale_percentage / 100);
       return "Por apenas R$" + salePrice.toFixed(2) + "!!";
     }
   }

@@ -57,9 +57,29 @@ export default new Vuex.Store({
     },
     showHigherPrices(state) {
       function comparePrice(a, b) {
-        if (parseFloat(a.price) < parseFloat(b.price)) return 1;
-        else if (parseFloat(a.price) > parseFloat(b.price)) return -1;
-        else return 0;
+        // eslint-disable-next-line no-debugger
+        // debugger;
+        if (!a.on_sale && !b.on_sale) {
+          if (parseFloat(a.price) < parseFloat(b.price)) return 1;
+          else if (parseFloat(a.price) > parseFloat(b.price)) return -1;
+          else return 0;
+        } else if (a.on_sale && !b.on_sale) {
+          let aSalePrice = a.price - a.price * (a.sale_percentage / 100);
+          if (parseFloat(aSalePrice) < parseFloat(b.price)) return 1;
+          else if (parseFloat(aSalePrice) > parseFloat(b.price)) return -1;
+          else return 0;
+        } else if (b.on_sale && !a.on_sale) {
+          let bSalePrice = b.price - b.price * (b.sale_percentage / 100);
+          if (parseFloat(a.price) < parseFloat(bSalePrice)) return 1;
+          else if (parseFloat(a.price) > parseFloat(bSalePrice)) return -1;
+          else return 0;
+        } else {
+          let aSalePrice = a.price - a.price * (a.sale_percentage / 100);
+          let bSalePrice = b.price - b.price * (b.sale_percentage / 100);
+          if (parseFloat(aSalePrice) < parseFloat(bSalePrice)) return 1;
+          else if (parseFloat(aSalePrice) > parseFloat(bSalePrice)) return -1;
+          else return 0;
+        }
       }
       state.products = state.products.sort(comparePrice);
     },
