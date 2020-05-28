@@ -8,7 +8,7 @@ export default new Vuex.Store({
     count: 0,
     dataProducts: undefined,
     products: undefined,
-    productTypeToShow: "on_sale",
+    productTypeToShow: "sale",
   },
   mutations: {
     addItemOnCart(state, data) {
@@ -44,16 +44,19 @@ export default new Vuex.Store({
       state.products = state.dataProducts.filter((product) => {
         return product.product_type == "electronic";
       });
+      state.productTypeToShow = "electronic";
     },
     showBookProducts(state) {
       state.products = state.dataProducts.filter((product) => {
         return product.product_type == "book";
       });
+      state.productTypeToShow = "book";
     },
     showSaleProducts(state) {
       state.products = state.dataProducts.filter((product) => {
         return product.on_sale == true;
       });
+      state.productTypeToShow = "sale";
     },
     showHigherPrices(state) {
       function comparePrice(a, b) {

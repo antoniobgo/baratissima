@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   data() {
     return {
@@ -44,22 +45,22 @@ export default {
       priceItems: ["Sem filtro de preço", "Maior preço", "Menor preço"]
     };
   },
+  computed: {
+    ...mapState(["productTypeToShow"])
+  },
   methods: {
     showSaleProducts() {
       this.$store.commit("showSaleProducts");
-      this.activeProductTypeShow = "sale";
       this.scrollUp();
       this.selectedPriceFilter = "";
     },
     showElectronicProducts() {
       this.$store.commit("showElectronicProducts");
-      this.activeProductTypeShow = "electronic";
       this.scrollUp();
       this.selectedPriceFilter = "";
     },
     showBookProducts() {
       this.$store.commit("showBookProducts");
-      this.activeProductTypeShow = "book";
       this.scrollUp();
       this.selectedPriceFilter = "";
     },
@@ -77,8 +78,8 @@ export default {
           this.$store.commit("showHigherPrices");
         else this.$store.commit("showSmallerPrices");
       } else {
-        if (this.activeProductTypeShow == "book") this.showBookProducts();
-        else if (this.activeProductTypeShow == "sale") this.showSaleProducts();
+        if (this.productTypeToShow == "book") this.showBookProducts();
+        else if (this.productTypeToShow == "sale") this.showSaleProducts();
         else this.showElectronicProducts();
       }
     }
