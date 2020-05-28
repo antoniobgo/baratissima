@@ -33,107 +33,53 @@
       label="Preço"
       dense
     )
-    v-select.mx-4.mt-4(
-      v-model="selectedQuantityFilter"
-      :items="quantityItems"
-      label="Quantidade"
-      dense
-    )
-    v-select.mx-4.mt-4(
-      v-model="selectedPopularityFilter"
-      :items="popularityItems"
-      label="Populares"
-      dense
-    )
 </template>
 
 <script>
 export default {
   data() {
     return {
-      selectedPriceFilter: undefined,
-      selectedQuantityFilter: undefined,
-      selectedPopularityFilter: undefined,
+      selectedPriceFilter: "",
       activeProductTypeShow: "sale",
-      priceItems: ["Sem filtro de preço", "Maior preço", "Menor preço"],
-      quantityItems: [
-        "Sem filtro de quantidade",
-        "Maior quantidade disponivel",
-        "Menor quantidade disponivel"
-      ],
-      popularityItems: [
-        "Sem filtro de popularidade",
-        "Maior popularidade",
-        "Menor popularidade"
-      ]
+      priceItems: ["Sem filtro de preço", "Maior preço", "Menor preço"]
     };
   },
   methods: {
     showSaleProducts() {
       this.$store.commit("showSaleProducts");
+      this.activeProductTypeShow = "sale";
       this.scrollUp();
-      this.resetFilters();
+      this.selectedPriceFilter = "";
     },
     showElectronicProducts() {
       this.$store.commit("showElectronicProducts");
+      this.activeProductTypeShow = "electronic";
       this.scrollUp();
-      this.resetFilters();
+      this.selectedPriceFilter = "";
     },
     showBookProducts() {
       this.$store.commit("showBookProducts");
+      this.activeProductTypeShow = "book";
       this.scrollUp();
-      this.resetFilters();
+      this.selectedPriceFilter = "";
     },
     scrollUp() {
       window.scrollTo(0, 0);
-    },
-    resetFilters() {
-      this.selectedQuantityFilter = undefined;
-      this.selectedPopularityFilter = undefined;
-      this.selectedPriceFilters = undefined;
     }
   },
   watch: {
     selectedPriceFilter() {
-      this.selectedQuantityFilter = undefined;
-      this.selectedPopularityFilter = undefined;
-      if (this.selectedPriceFilter == "Sem filtro de preço")
-        this.selectedPriceFilter = undefined;
-      else if (
-        this.selectedPriceFilter != undefined &&
+      if (
+        this.selectedPriceFilter != "" &&
         this.selectedPriceFilter != "Sem filtro de preço"
       ) {
         if (this.selectedPriceFilter == "Maior preço")
           this.$store.commit("showHigherPrices");
         else this.$store.commit("showSmallerPrices");
-      }
-    },
-    selectedQuantityFilter() {
-      this.selectedPriceFilter = undefined;
-      this.selectedPopularityFilter = undefined;
-      if (this.selectedQuantityFilter != "Sem filtro de quantidade")
-        this.selectedQuantityFilter = undefined;
-      else if (
-        this.selectedQuantityFilter != undefined &&
-        this.selectedQuantityFilter != "Sem filtro de quantidade"
-      ) {
-        if (this.selectedQuantityFilter == "Maior quantidade disponivel")
-          this.$store.commit("showHigherQuantities");
-        else this.$store.commit("showSmallerQuantities");
-      }
-    },
-    selectedPopularityFilter() {
-      this.selectedQuantityFilter = undefined;
-      this.selectedPriceFilter = undefined;
-      if (this.selectedPopularityFilter != undefined)
-        this.selectedPopularityFilter = undefined;
-      else if (
-        this.selectedPopularityFilter != undefined &&
-        this.selectedPopularityFilter != "Sem filtro de popularidade"
-      ) {
-        if (this.selectedPopularityFilter == "Maior popularidade")
-          this.$store.commit("showHigherPopularity");
-        else this.$store.commit("showSmallerPopularity");
+      } else {
+        if (this.activeProductTypeShow == "book") this.showBookProducts();
+        else if (this.activeProductTypeShow == "sale") this.showSaleProducts();
+        else this.showElectronicProducts();
       }
     }
   }
