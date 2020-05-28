@@ -40,7 +40,7 @@ import { mapState } from "vuex";
 export default {
   data() {
     return {
-      selectedPriceFilter: "",
+      selectedPriceFilter: "Sem filtro de preço",
       activeProductTypeShow: "sale",
       priceItems: ["Sem filtro de preço", "Maior preço", "Menor preço"]
     };
@@ -52,17 +52,17 @@ export default {
     showSaleProducts() {
       this.$store.commit("showSaleProducts");
       this.scrollUp();
-      this.selectedPriceFilter = "";
+      this.selectedPriceFilter = "Sem filtro de preço";
     },
     showElectronicProducts() {
       this.$store.commit("showElectronicProducts");
       this.scrollUp();
-      this.selectedPriceFilter = "";
+      this.selectedPriceFilter = "Sem filtro de preço";
     },
     showBookProducts() {
       this.$store.commit("showBookProducts");
       this.scrollUp();
-      this.selectedPriceFilter = "";
+      this.selectedPriceFilter = "Sem filtro de preço";
     },
     scrollUp() {
       window.scrollTo(0, 0);
@@ -70,18 +70,13 @@ export default {
   },
   watch: {
     selectedPriceFilter() {
-      if (
-        this.selectedPriceFilter != "" &&
-        this.selectedPriceFilter != "Sem filtro de preço"
-      ) {
-        if (this.selectedPriceFilter == "Maior preço")
-          this.$store.commit("showHigherPrices");
-        else this.$store.commit("showSmallerPrices");
-      } else {
+      if (this.selectedPriceFilter == "Sem filtro de preço") {
         if (this.productTypeToShow == "book") this.showBookProducts();
         else if (this.productTypeToShow == "sale") this.showSaleProducts();
         else this.showElectronicProducts();
-      }
+      } else if (this.selectedPriceFilter == "Maior preço")
+        this.$store.commit("showHigherPrices");
+      else this.$store.commit("showSmallerPrices");
     }
   }
 };
