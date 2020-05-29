@@ -37,7 +37,6 @@ v-menu(
       v-list-item-content
         v-list-item-title Preço total: R${{ totalPrice }}
         v-list-item-title Pague agora!
-        v-list-item-title {{ cartProductsSize }}
   v-card(v-else width="300")
     v-card-title
       | Seu carrinho está vazio!

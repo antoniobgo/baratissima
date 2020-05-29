@@ -1,6 +1,7 @@
 <template lang="pug">
   v-container(
     v-if="products && !loading"
+    
     fluid
     )
     v-row(justify="center")

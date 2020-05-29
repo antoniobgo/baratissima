@@ -3,6 +3,8 @@
     max-width="300"
     outlined
   )
+    v-row.my-3(justify="center")
+      h4 {{ product.name }}
     v-img(
       :src="productImageLink"
       height="180"
@@ -10,10 +12,10 @@
     v-card-text
       v-list-item(three-line)
         v-list-item-content
-          v-list-item-title {{ product.name }}
           v-list-item-subtitle {{ product.description }}
           v-list-item-subtitle {{ productPrice }}
           v-list-item-subtitle(v-if="product.on_sale") {{ productSalePrice }}
+          v-list-item-subtitle(v-if="product.on_sale") {{ productSalePercentage }}
     v-card-actions
       items-quantity-dialog(:product="product")
 </template>
@@ -44,6 +46,9 @@ export default {
         this.product.price -
         this.product.price * (this.product.sale_percentage / 100);
       return "Por apenas R$" + salePrice.toFixed(2) + "!!";
+    },
+    productSalePercentage() {
+      return this.product.sale_percentage + "% OFF!!";
     }
   }
 };

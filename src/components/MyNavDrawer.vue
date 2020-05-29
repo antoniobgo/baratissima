@@ -77,6 +77,7 @@ export default {
       } else if (this.selectedPriceFilter == "Maior preço")
         this.$store.commit("showHigherPrices");
       else this.$store.commit("showSmallerPrices");
+      this.scrollUp();
     }
   }
 };
