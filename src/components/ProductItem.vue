@@ -12,10 +12,12 @@
     v-card-text
       v-list-item(three-line)
         v-list-item-content
+          v-list-item-title
           v-list-item-subtitle {{ product.description }}
           v-list-item-subtitle {{ productPrice }}
           v-list-item-subtitle(v-if="product.on_sale") {{ productSalePrice }}
           v-list-item-subtitle(v-if="product.on_sale") {{ productSalePercentage }}
+    v-divider
     v-card-actions
       items-quantity-dialog(:product="product")
 </template>

@@ -110,6 +110,11 @@ export default new Vuex.Store({
       }
       state.products = state.products.sort(comparePrice);
     },
+    cleanCart(state) {
+      state.products = state.dataProducts;
+      state.count = 0;
+      state.cartProducts = [];
+    },
   },
   actions: {},
   modules: {},

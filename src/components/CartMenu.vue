@@ -35,8 +35,10 @@ v-menu(
     v-divider
     v-list-item
       v-list-item-content
-        v-list-item-title Preço total: R${{ totalPrice }}
-        v-list-item-title Pague agora!
+        h4 Preço total: R${{ totalPrice }}
+    v-row(justify="center")
+      v-btn.mb-4(@click="cleanCart" outlined)
+        | Pague agora!
   v-card(v-else width="300")
     v-card-title
       | Seu carrinho está vazio!
@@ -84,6 +86,9 @@ export default {
         this.$store.commit("decrementProductBoughtQuantity", {
           product: product
         });
+    },
+    cleanCart() {
+      this.$store.commit("cleanCart");
     }
   }
 };

@@ -3,9 +3,9 @@
     v-list-item
         v-list-item-content
           v-list-item-title(class="title")
-            | Baratíssima
+            h3 Baratíssima
           v-list-item-subtitle
-            | Seja bem vindo
+            h4 Seja bem vindo!
     v-divider
     v-list-item(@click="showSaleProducts" link)
       v-list-item-icon

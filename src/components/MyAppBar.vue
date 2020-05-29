@@ -1,8 +1,8 @@
 <template lang="pug">
   v-app-bar(app)
-    | Baratíssima Loja
+    h3 Loja Virtual
     v-spacer
-    | Carrinho
+    h4 Carrinho
     cart-menu
 </template>
 
@@ -10,7 +10,7 @@
 import CartMenu from "@/components/CartMenu";
 export default {
   components: {
-    CartMenu,
-  },
+    CartMenu
+  }
 };
 </script>
