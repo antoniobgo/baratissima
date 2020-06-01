@@ -3,7 +3,7 @@
     v-list-item
         v-list-item-content
           v-list-item-title(class="title")
-            h3 Baratíssima
+            h3 Loja virtual
           v-list-item-subtitle
             h4 Seja bem vindo!
     v-divider

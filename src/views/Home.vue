@@ -36,17 +36,19 @@ export default {
     };
   },
   mounted() {
-    axios.get("http://localhost:3001/api/products").then(response => {
-      this.$store.commit(
-        "setDataProducts",
-        this.lodash.shuffle(response.data.data)
-      );
-      let products = this.lodash.filter(this.dataProducts, product => {
-        return product.on_sale == true;
+    axios
+      .get("https://5ed52f3e8769250016e6338a.mockapi.io/products")
+      .then(response => {
+        this.$store.commit(
+          "setDataProducts",
+          this.lodash.shuffle(response.data)
+        );
+        let products = this.lodash.filter(this.dataProducts, product => {
+          return product.on_sale == true;
+        });
+        this.$store.commit("setProducts", products);
+        this.loading = false;
       });
-      this.$store.commit("setProducts", products);
-      this.loading = false;
-    });
   },
   computed: {
     ...mapState(["products", "dataProducts", "productTypeToShow"]),

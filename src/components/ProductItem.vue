@@ -5,6 +5,7 @@
   )
     v-row.my-3(justify="center")
       h4 {{ product.name }}
+    v-divider.my-2
     v-img(
       :src="productImageLink"
       height="180"
