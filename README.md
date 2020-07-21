@@ -2,7 +2,7 @@
 
 ## Deployed project URL
 ```
-https://loja-virtual-bc8fd.firebaseapp.com/#/
+loja-virtual-bc8fd.web.app
 ```
 
 
