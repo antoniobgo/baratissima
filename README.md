@@ -1,5 +1,11 @@
 # loja-virtual
 
+## Deployed project URL
+```
+https://loja-virtual-bc8fd.firebaseapp.com/#/
+```
+
+
 ## Project setup
 ```
 yarn install
