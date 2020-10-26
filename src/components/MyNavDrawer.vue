@@ -33,6 +33,9 @@
       label="Preço"
       dense
     )
+    v-col
+      v-btn(@click="goToAddProductPage")
+        | Adicionar Produto
 </template>
 
 <script>
@@ -66,6 +69,9 @@ export default {
     },
     scrollUp() {
       window.scrollTo(0, 0);
+    },
+    goToAddProductPage() {
+      this.$router.push('add-product')
     }
   },
   watch: {
@@ -82,3 +88,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.ai {
+  height: 100%;
+}
+</style>
