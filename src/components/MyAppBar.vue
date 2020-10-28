@@ -2,7 +2,7 @@
   v-app-bar(app)
     h3 Loja Virtual
     v-spacer
-    h4 Carrinho
+    v-btn Login
     cart-menu
 </template>
 
