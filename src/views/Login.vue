@@ -12,7 +12,7 @@
           label="Password"
         )
       v-btn Entrar
-      v-btn Criar Conta
+      v-btn(@click="goToCreateAccount") Criar Conta
 </template>
 
 <script>
@@ -23,6 +23,11 @@ export default {
         email: undefined,
         password: undefined
       }
+    }
+  },
+  methods: {
+    goToCreateAccount() {
+      this.$router.push('SignUp')
     }
   }
 }
