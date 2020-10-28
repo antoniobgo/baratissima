@@ -88,9 +88,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.ai {
-  height: 100%;
-}
-</style>
