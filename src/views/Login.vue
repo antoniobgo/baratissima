@@ -1,19 +1,21 @@
 <template lang="pug">
-  v-card(outlined)
-    v-form
-      v-col
-        v-text-field(
-          v-model="form.email"
-          label="Email"
-        )
-      v-col
-        v-text-field(
-          v-model="form.password"
-          label="Password"
-          @keyup.enter="login"
-        )
-      v-btn(@click="login") Entrar
-      v-btn(@click="goToCreateAccount") Criar Conta
+v-card.d-flex.flex-column(
+  outlined
+  width="700"
+  )
+  .flex-column.pa-3
+    v-text-field(
+      v-model="form.email"
+      label="Email"
+    )
+    v-text-field(
+      v-model="form.password"
+      label="Password"
+      @keyup.enter="login"
+    )
+  .d-flex.justify-center
+    v-btn.ma-3(@click="login") Entrar
+    v-btn.ma-3(@click="goToCreateAccount") Criar Conta
 </template>
 
 <script>
