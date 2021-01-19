@@ -9,6 +9,11 @@ export default new Vuex.Store({
     dataProducts: undefined,
     products: undefined,
     productTypeToShow: "sale",
+    currentUser: {
+      email: undefined,
+      token: undefined
+    },
+    loggedIn: false
   },
   mutations: {
     addItemOnCart(state, data) {
@@ -115,7 +120,13 @@ export default new Vuex.Store({
       state.count = 0;
       state.cartProducts = [];
     },
+    saveUserAfterLogIn(state, user) {
+      state.currentUser.email = user.email;
+      state.currentUser.token = user.token;
+      state.loggedIn = true;
+    }
   },
+ 
   actions: {},
   modules: {},
 });
