@@ -10,6 +10,7 @@
         v-text-field(
           v-model="form.password"
           label="Password"
+          @keyup.enter="login"
         )
       v-btn(@click="login") Entrar
       v-btn(@click="goToCreateAccount") Criar Conta
