@@ -1,24 +1,24 @@
 <template lang="pug">
-  v-card(
-    max-width=1000,
-    outlined
+v-card.d-flex.justify-space-between(
+  outlined
+  max-width="700"
+  )
+  .flex-column.pa-3
+    v-text-field(
+      v-model="currentUser.email"
+      label="Email"
+      disabled=true
     )
-    v-row.ml-1
-      v-col(cols="3")
-        v-text-field(
-          v-model="currentUser.email"
-          label="Email"
-          disabled=true
-        )
-        v-text-field(
-          v-model="fakePassword"
-          type="password"
-          label="Password"
-          disabled=true
-        )
-      v-col(cols="9")
-        v-btn() Changed Password
-        v-btn() Delete Account
+    v-text-field(
+      v-model="fakePassword"
+      type="password"
+      label="Password"
+      disabled=true
+    )
+  .d-flex.flex-column.justify-space-around.pa-3
+    v-btn() Changed Password
+    v-btn() Delete account
+
 </template>
 
 <script>
