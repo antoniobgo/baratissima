@@ -7,6 +7,7 @@ v-card.d-flex.flex-column(
     v-text-field(
       v-model="form.email"
       label="Email"
+      width="100"
     )
     v-text-field(
       v-model="form.password"
@@ -14,8 +15,8 @@ v-card.d-flex.flex-column(
       @keyup.enter="login"
     )
   .d-flex.justify-center
-    v-btn.ma-3(@click="login") Entrar
-    v-btn.ma-3(@click="goToCreateAccount") Criar Conta
+    v-btn.ma-3(@click="login") Log in
+    v-btn.ma-3(@click="goToCreateAccount") create account
 </template>
 
 <script>
@@ -41,7 +42,8 @@ export default {
         if(response.status === 200) {
           let user = {
             email: response.data.email,
-            token: response.data.token
+            token: response.data.token,
+            id: response.data.id
           }
           this.$store.commit('saveUserAfterLogIn', user)
           this.$router.push({name: 'Home'})

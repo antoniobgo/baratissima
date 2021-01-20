@@ -11,7 +11,8 @@ export default new Vuex.Store({
     productTypeToShow: "sale",
     currentUser: {
       email: undefined,
-      token: undefined
+      token: undefined,
+      id: undefined
     },
     loggedIn: false
   },
@@ -123,6 +124,7 @@ export default new Vuex.Store({
     saveUserAfterLogIn(state, user) {
       state.currentUser.email = user.email;
       state.currentUser.token = user.token;
+      state.currentUser.id = user.id;
       state.loggedIn = true;
     }
   },

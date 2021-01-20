@@ -16,13 +16,14 @@ v-card.d-flex.justify-space-between(
       disabled=true
     )
   .d-flex.flex-column.justify-space-around.pa-3
-    v-btn() Changed Password
-    v-btn() Delete account
+    v-btn() Change Password
+    v-btn(@click="deleteAccount") Delete account
 
 </template>
 
 <script>
 import { mapState } from "vuex";
+import axios from "axios";
 
 export default {
   data() {
@@ -32,6 +33,19 @@ export default {
   },
   computed: {
     ...mapState(['currentUser'])
+  },
+  methods: {
+    deleteAccount() {
+      let uri = "http://localhost:3000/api/v1/users/"+this.currentUser.id
+      axios.defaults.headers.common["Authorization"] = this.currentUser.token;
+      axios.delete(uri).then(
+        response => {
+          if(response.status === 204) {
+            this.$router.push({name: 'Home'})
+          }
+        }
+      )
+    }
   }
 }
 </script>
