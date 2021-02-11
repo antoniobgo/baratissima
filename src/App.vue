@@ -10,15 +10,16 @@
 <script>
 import MyAppBar from "@/components/MyAppBar";
 import MyNavDrawer from "@/components/MyNavDrawer";
+
 export default {
   name: "App",
 
   components: {
     MyAppBar,
-    MyNavDrawer,
+    MyNavDrawer
   },
-
-  data: () => ({
-  }),
+  beforeMount() {
+    this.$store.commit("initializeStore")
+  },
 };
 </script>

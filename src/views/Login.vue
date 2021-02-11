@@ -27,7 +27,7 @@ export default {
       form: {
         email: undefined,
         password: undefined
-      }
+      },
     }
   },
   methods: {

@@ -18,6 +18,8 @@ v-card.d-flex.justify-space-between(
   .d-flex.flex-column.justify-space-around.pa-3
     v-btn() Change Password
     v-btn(@click="deleteAccount") Delete account
+    v-btn(@click="logout") Logout
+    
 
 </template>
 
@@ -38,13 +40,13 @@ export default {
     deleteAccount() {
       let uri = "http://localhost:3000/api/v1/users/"+this.currentUser.id
       axios.defaults.headers.common["Authorization"] = this.currentUser.token;
-      axios.delete(uri).then(
-        response => {
-          if(response.status === 204) {
-            this.$router.push({name: 'Home'})
-          }
-        }
-      )
+      axios.delete(uri).then(response => {
+        if(response.status === 204) {
+          this.$router.push({name: 'Home'})}
+      });
+    },
+    logout() {
+      this.$store.commit("logout");
     }
   }
 }

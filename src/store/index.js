@@ -16,6 +16,11 @@ export default new Vuex.Store({
     },
     loggedIn: false
   },
+  getters: {
+    isLoggedIn(state) {
+      return state.loggedIn;
+    }
+  },
   mutations: {
     addItemOnCart(state, data) {
       if (!state.cartProducts.includes(data.product))
@@ -126,9 +131,27 @@ export default new Vuex.Store({
       state.currentUser.token = user.token;
       state.currentUser.id = user.id;
       state.loggedIn = true;
+      localStorage.setItem("loggedIn", true);
+      localStorage.setItem("user", user);
+    },
+    initializeStore(state) {
+      if(localStorage.getItem("loggedIn") == "true") {
+        let user = localStorage.getItem("user");
+        state.currentUser.email = user.email;
+        state.currentUser.token = user.token;
+        state.currentUser.id = user.id;
+        state.loggedIn = true;
+      }
+    },
+    logout(state) {
+      localStorage.setItem("user", undefined);
+      localStorage.setItem("loggedIn", false);
+      state.currentUser.email = undefined;
+      state.currentUser.token = undefined;
+      state.currentUser.id = undefined;
+      state.loggedIn = false;
     }
   },
- 
   actions: {},
   modules: {},
 });
