@@ -34,7 +34,12 @@ export default {
     }
   },
   computed: {
-    ...mapState(['currentUser'])
+    ...mapState(['currentUser', 'loggedIn'])
+  },
+  beforeMount() {
+    if(!this.loggedIn)
+      this.$router.push({name: 'Home'})
+
   },
   methods: {
     deleteAccount() {
