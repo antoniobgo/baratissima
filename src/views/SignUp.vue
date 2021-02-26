@@ -8,16 +8,24 @@
     v-col
       v-text-field(
         v-model="form.password"
+        :type="showPassword ? 'text' : 'password'"
         label="Password"
+        :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+        @click:append="showPassword = !showPassword"
       )
     v-col
       v-text-field(
         v-model="form.password_confirm"
+        :type="showPassword ? 'text' : 'password'"
         label="Confirm Password"
+        :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+        @click:append="showPassword = !showPassword"
+        :rules="[rules.password_match]"
       )
     v-col
       v-btn(
         @click="createAccount"
+        :disabled="!matchingPasswords() || emptyPassword() || form.email.length === 0"
       ) Criar conta
 </template>
 
@@ -29,8 +37,12 @@ export default {
     return {
       form: {
         email: undefined,
-        password: undefined,
-        password_confirm: undefined
+        password: "",
+        password_confirm: "",
+      },
+      showPassword: false,
+      rules: {
+        password_match: password_confirm => password_confirm === this.form.password || "Both passwords should match"
       }
     }
   },
@@ -43,6 +55,12 @@ export default {
         if(response.status === 201)
           this.$router.push('Login')
       })
+    },
+    matchingPasswords() {
+      return this.form.password === this.form.password_confirm
+    },
+    emptyPassword() {
+      return this.form.password.length === 0 || this.form.password_confirm.length === 0
     }
   }
 }
